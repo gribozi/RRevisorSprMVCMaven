@@ -46,35 +46,35 @@
 					</c:otherwise>
 				</c:choose>
 				<c:choose>
-					<c:when test="${sortFromPost == 'total_rating'}">
-						<option value="total_rating" selected>по суммарному рейтингу</option>
+					<c:when test="${sortFromPost == 'rateTotal'}">
+						<option value="rateTotal" selected>по суммарному рейтингу</option>
 					</c:when>
 					<c:otherwise>
-						<option value="total_rating">по суммарному рейтингу</option>
+						<option value="rateTotal">по суммарному рейтингу</option>
 					</c:otherwise>
 				</c:choose>
 				<c:choose>
-					<c:when test="${sortFromPost == 'cuisine_rating'}">
-						<option value="cuisine_rating" selected>по ретингу кухни</option>
+					<c:when test="${sortFromPost == 'rateCuisine'}">
+						<option value="rateCuisine" selected>по ретингу кухни</option>
 					</c:when>
 					<c:otherwise>
-						<option value="cuisine_rating">по ретингу кухни</option>
+						<option value="rateCuisine">по ретингу кухни</option>
 					</c:otherwise>
 				</c:choose>
 				<c:choose>
-					<c:when test="${sortFromPost == 'interior_rating'}">
-						<option value="interior_rating" selected>по рейтингу интерьера</option>
+					<c:when test="${sortFromPost == 'rateInterior'}">
+						<option value="rateInterior" selected>по рейтингу интерьера</option>
 					</c:when>
 					<c:otherwise>
-						<option value="interior_rating">по рейтингу интерьера</option>
+						<option value="rateInterior">по рейтингу интерьера</option>
 					</c:otherwise>
 				</c:choose>
 				<c:choose>
-					<c:when test="${sortFromPost == 'service_rating'}">
-						<option value="service_rating" selected>по рейтингу обслуживания</option>
+					<c:when test="${sortFromPost == 'rateService'}">
+						<option value="rateService" selected>по рейтингу обслуживания</option>
 					</c:when>
 					<c:otherwise>
-						<option value="service_rating">по рейтингу обслуживания</option>
+						<option value="rateService">по рейтингу обслуживания</option>
 					</c:otherwise>
 				</c:choose>
 			</select>
