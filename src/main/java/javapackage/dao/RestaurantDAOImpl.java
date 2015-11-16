@@ -7,10 +7,12 @@ import org.hibernate.Session;
 import org.hibernate.criterion.MatchMode;
 import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
+import org.springframework.stereotype.Repository;
 
 import javapackage.domain.Restaurant;
 import javapackage.util.HibernateUtil;
 
+@Repository
 public class RestaurantDAOImpl implements RestaurantDAO {
 
 	// Возвращает список всех ресторанов, выбранных из БД. Параметр метода задает способ сортировки результата.

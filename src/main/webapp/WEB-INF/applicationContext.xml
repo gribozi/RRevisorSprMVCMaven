@@ -1,8 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-       xmlns:context="http://www.springframework.org/schema/context"
-       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+		http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context
+		http://www.springframework.org/schema/context/spring-context.xsd">
 
+	<!-- Для иъекций путем сканирования и аннотаций
+	<context:annotation-config/>
+	<context:component-scan base-package="javapackage.services" />
+	 -->
+	
+	<bean id="rDAO" class="javapackage.dao.RestaurantDAOJDBCImpl" />
+	
+	<!--
+	<bean id="rDAO" class="javapackage.dao.RestaurantDAOImpl" />
+	 -->
+
+	<bean class="javapackage.services.UserServiceImpl">
+		<property name="restDAO" ref="rDAO" />
+	</bean>
+	
+	<bean class="javapackage.services.AdminServiceImpl">
+		<property name="restDAO" ref="rDAO" />
+	</bean>
 
 </beans>

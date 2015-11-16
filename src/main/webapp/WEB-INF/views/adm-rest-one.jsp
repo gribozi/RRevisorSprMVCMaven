@@ -27,7 +27,7 @@
 	<div class="container">
 
 		<c:choose>
-		    <c:when test="${savedOK == true}">
+		    <c:when test="${savedOK}">
 		       <p style="color: green" class="message-adm">Всё успешно соранено.</p>
 		    </c:when>
 		    <c:when test="${savedOK == false}">

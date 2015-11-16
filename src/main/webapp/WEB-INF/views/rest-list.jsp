@@ -30,7 +30,7 @@
 		<form action="RestList" method="post" class="form-user">
 			<p><input type="search" name="queary" placeholder="Поиск по ресторанам" value="${quearyFromPost}" size="22" required>
 			<input type="submit" value="Найти"></p>
-			<c:if test="${quearyFromPost != null}">
+			<c:if test="${not empty quearyFromPost}">
 				<a class="link-help" href="RestList">Полный список ресторанов</a>
 			</c:if>
 		</form>
@@ -38,7 +38,7 @@
 			<p class="help">Отсортировать все рестораны:</p>
 			<select id="sort" name="sort" onchange="this.form.submit()">
 				<c:choose>
-					<c:when test="${sortFromPost == null}">
+					<c:when test="${empty sortFromPost}">
 						<option selected>Выберите сортировку</option>
 					</c:when>
 					<c:otherwise>

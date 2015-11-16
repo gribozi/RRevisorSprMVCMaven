@@ -6,19 +6,27 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javapackage.dao.RestaurantDAO;
-import javapackage.dao.RestaurantDAOImpl;
 import javapackage.domain.Restaurant;
 
 @Service
 public class AdminServiceImpl implements AdminService {
 
-	private RestaurantDAO restarauntDAOImpl = new RestaurantDAOImpl();
+	// Здесь производится инъекция через XML-файл aplicationContext.xml
+	private RestaurantDAO restDAO;
+
+	public RestaurantDAO getRestDAO() {
+		return restDAO;
+	}
+
+	public void setRestDAO(RestaurantDAO restDAO) {
+		this.restDAO = restDAO;
+	}
 
 	@Transactional
 	@Override
 	public int createRestaurant(String restName, String restReview, Byte restCuisine, Byte restInterior, Byte restService) {
 		
-		int restId = restarauntDAOImpl.createRestaurant(new Restaurant(restName, restReview, restCuisine, restInterior, restService));
+		int restId = restDAO.createRestaurant(new Restaurant(restName, restReview, restCuisine, restInterior, restService));
 		
 		if (restId != 0) {
 
@@ -33,21 +41,21 @@ public class AdminServiceImpl implements AdminService {
 	@Override
 	public List<Restaurant> readAllRestaurants(String sort) {
 
-		return restarauntDAOImpl.readAllRestaurants(sort);
+		return restDAO.readAllRestaurants(sort);
 	}
 
 	@Transactional
 	@Override
 	public Restaurant readRestaurantById(int id) {
 
-		return restarauntDAOImpl.readRestaurantById(id);
+		return restDAO.readRestaurantById(id);
 	}
 
 	@Transactional
 	@Override
 	public boolean updateRestaurant(int restId, String restName, String restReview, Byte restCuisine, Byte restInterior, Byte restService) {
 		
-		if (restarauntDAOImpl.updateRestaurant(new Restaurant(restId, restName, restReview, restCuisine, restInterior, restService))) {
+		if (restDAO.updateRestaurant(new Restaurant(restId, restName, restReview, restCuisine, restInterior, restService))) {
 
 			//// Принимаем фотографии, отправленные пользователем
 			//// String photo = request.getParameter("photo");
@@ -64,7 +72,7 @@ public class AdminServiceImpl implements AdminService {
 	@Override
 	public boolean deleteRestaurants(int[] selected_rests) {
 
-		return restarauntDAOImpl.deleteRestaurants(selected_rests);
+		return restDAO.deleteRestaurants(selected_rests);
 	}
 
 }

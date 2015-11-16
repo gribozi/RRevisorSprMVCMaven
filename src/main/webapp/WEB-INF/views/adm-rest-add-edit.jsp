@@ -15,7 +15,7 @@
 
 <title>
 	<c:choose>
-		<c:when test="${restOne.id != null}">
+		<c:when test="${not empty restOne.id}">
 			${restOne.name}: Editing
 		</c:when>
 		<c:otherwise>
@@ -72,12 +72,12 @@
 			
 			<div class="btn-wrap-adm send-btn-adm"><input type="submit" class="btn-adm" value="Сохранить&nbsp;ресторан"></div>
 			
-			<c:if test="${restOne.id != null}">
+			<c:if test="${not empty restOne.id}">
 				<div class="btn-wrap-adm send-btn-adm"><button formaction="AdmRestList" class="btn-adm" formmethod="post">Удалить</button></div>
 			</c:if>
 		</form>		
 			
-	    <c:if test="${restOne.id != null}">
+	    <c:if test="${not empty restOne.id}">
 		 	<div class="gallery">
 			 	<a class="fancy" rel="group" title="Это фото 1" href="img/gallery/${restOne.id}/010-b.jpg"><img src="img/gallery/${restOne.id}/010-s.jpg" /></a>
 			 	<a class="fancy" rel="group" title="Это фото 2" href="img/gallery/${restOne.id}/020-b.jpg"><img src="img/gallery/${restOne.id}/020-s.jpg" /></a>

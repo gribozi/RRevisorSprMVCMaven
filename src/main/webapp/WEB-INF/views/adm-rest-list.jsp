@@ -28,7 +28,7 @@
 	<div class="container">
 	
 		<c:choose>
-		    <c:when test="${dellOK == true}">
+		    <c:when test="${dellOK}">
 		       <p style="color: green" class="message-adm">Выбранные рестораны успешно удалены.</p>
 		    </c:when>
 		    <c:when test="${dellOK == false}">

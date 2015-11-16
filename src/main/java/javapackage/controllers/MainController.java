@@ -1,21 +1,25 @@
 package javapackage.controllers;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javapackage.services.AdminService;
-import javapackage.services.AdminServiceImpl;
 import javapackage.services.UserService;
-import javapackage.services.UserServiceImpl;
 
 @Controller
 public class MainController {
-
-	private AdminService adminServiceImpl = new AdminServiceImpl();
-	private UserService userServiceImpl = new UserServiceImpl();
-
+	
+	// Здесь производится автоматическая инъекция с помощью аннотации
+	@Autowired
+	private UserService usrService;
+	
+	// Здесь производится автоматическая инъекция с помощью аннотации
+	@Autowired
+	private AdminService admService;
+	
 	@RequestMapping(value = "/RestList")
 	public String displayRestList(
 			@RequestParam(value = "queary", required = false) String queary,
@@ -23,24 +27,24 @@ public class MainController {
 
 		// Если обрабатываем POST-запрос поиска
 		if (queary != null) {
-			model.addAttribute("restList", userServiceImpl.readAllRestaurantsBySearch(queary));
+			model.addAttribute("restList", usrService.readAllRestaurantsBySearch(queary));
 			model.addAttribute("quearyFromPost", queary);
 		}
 		// Если обрабатываеми POST-запрос сортировки
 		else if (sort != null) {
-			model.addAttribute("restList", userServiceImpl.readAllRestaurants(sort));
+			model.addAttribute("restList", usrService.readAllRestaurants(sort));
 			model.addAttribute("sortFromPost", sort);
 		}
 		// Если обрабатываеми GET-запрос (без параметров)
 		else {
-			model.addAttribute("restList", userServiceImpl.readAllRestaurants("rateTotal"));
+			model.addAttribute("restList", usrService.readAllRestaurants("rateTotal"));
 		}
 		return "rest-list";
 	}
 
 	@RequestMapping(value = "/RestOne")
 	public String displayRestOne(@RequestParam("rest") int restId, Model model) {
-		model.addAttribute("restOne", userServiceImpl.readRestaurantById(restId));
+		model.addAttribute("restOne", usrService.readRestaurantById(restId));
 
 		//// Читаем или считаем фотки из папки ресторана
 		//// filesWork.readPhoto(restId);
@@ -62,17 +66,18 @@ public class MainController {
 			int[] removeOne = new int[1];
 			removeOne[0] = id;
 
-			model.addAttribute("dellOK", adminServiceImpl.deleteRestaurants(removeOne));
+			model.addAttribute("dellOK", admService.deleteRestaurants(removeOne));
 		}
 		
 		// Если удаляется несколько ресторанов (со страницы adm-rest-list.jsp)
 		else if (checked != null) {
-			model.addAttribute("dellOK", adminServiceImpl.deleteRestaurants(checked));
+			model.addAttribute("dellOK", admService.deleteRestaurants(checked));
 		}
 
+		// TODO выполнить проверку конкретно на GET-запрос (сейчас GET-запрос "перекрывается" POST-эдитом с заданным id)
 		// Выполняется в любом случае, и когда POST-запросы, и когда страница открывается без параметров (GET-запрос)
 
-		model.addAttribute("restList", adminServiceImpl.readAllRestaurants("rateTotal"));
+		model.addAttribute("restList", admService.readAllRestaurants("rateTotal"));
 		return "adm-rest-list";
 	}
 
@@ -92,7 +97,7 @@ public class MainController {
 		// Если id не задан, значит обрабатываем добавление
 		if (restId == 0) {
 			
-			restId = adminServiceImpl.createRestaurant(restName, restReview, restCuisine, restInterior, restService);
+			restId = admService.createRestaurant(restName, restReview, restCuisine, restInterior, restService);
 			if (restId != 0) savedOK = true;
 			else savedOK = false;
 			
@@ -103,13 +108,13 @@ public class MainController {
 		// Если есть id, значит обрабатываем редактирование
 		else {
 
-			model.addAttribute("savedOK", adminServiceImpl.updateRestaurant(restId, restName, restReview, restCuisine, restInterior, restService));
+			model.addAttribute("savedOK", admService.updateRestaurant(restId, restName, restReview, restCuisine, restInterior, restService));
 			model.addAttribute("operationType", "edit");
 		}
 
 		// Выполняется в любом случае, и когда POST-запросы, и когда страница открывается без параметров (GET-запрос)
 
-		model.addAttribute("restOne", adminServiceImpl.readRestaurantById(restId));
+		model.addAttribute("restOne", admService.readRestaurantById(restId));
 
 		//// Читаем или считаем фотки из папки ресторана
 		//// filesWork.readPhoto(restId);
@@ -124,7 +129,7 @@ public class MainController {
 		// Если GET-запрос на редактирование
 		if (restId != 0) {
 
-			model.addAttribute("restOne", adminServiceImpl.readRestaurantById(restId));
+			model.addAttribute("restOne", admService.readRestaurantById(restId));
 
 			//// Читаем или считаем фотки из папки ресторана
 			//// filesWork.readPhoto(restId);
