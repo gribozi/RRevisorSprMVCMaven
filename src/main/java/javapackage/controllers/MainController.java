@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javapackage.services.AdminService;
@@ -20,7 +21,7 @@ public class MainController {
 	@Autowired
 	private AdminService admService;
 	
-	@RequestMapping(value = "/RestList")
+	@RequestMapping(value = {"/", "/RestList"})
 	public String displayRestList(
 			@RequestParam(value = "queary", required = false) String queary,
 			@RequestParam(value = "sort", required = false) String sort, Model model) {
@@ -74,15 +75,14 @@ public class MainController {
 			model.addAttribute("dellOK", admService.deleteRestaurants(checked));
 		}
 
-		// TODO выполнить проверку конкретно на GET-запрос (сейчас GET-запрос "перекрывается" POST-эдитом с заданным id)
 		// Выполняется в любом случае, и когда POST-запросы, и когда страница открывается без параметров (GET-запрос)
 
 		model.addAttribute("restList", admService.readAllRestaurants("rateTotal"));
 		return "adm-rest-list";
 	}
 
-	@RequestMapping(value = "/AdmRestOne")
-	public String displayAdmRestOne(
+	@RequestMapping(value = "/AdmRestOne", method = RequestMethod.POST)
+	public String displayAdmRestOnePOST(
 			@RequestParam(value = "id", required = false, defaultValue = "0") int restId,
 			@RequestParam(value = "name", required = false) String restName,
 			@RequestParam(value = "review", required = false) String restReview,
@@ -112,7 +112,23 @@ public class MainController {
 			model.addAttribute("operationType", "edit");
 		}
 
-		// Выполняется в любом случае, и когда POST-запросы, и когда страница открывается без параметров (GET-запрос)
+		model.addAttribute("restOne", admService.readRestaurantById(restId));
+
+		//// Читаем или считаем фотки из папки ресторана
+		//// filesWork.readPhoto(restId);
+		//// model.addAttribute("aAa", bBb);
+
+		return "adm-rest-one";
+	}
+
+	@RequestMapping(value = "/AdmRestOne", method = RequestMethod.GET)
+	public String displayAdmRestOneGET(
+			@RequestParam(value = "id", required = false, defaultValue = "0") int restId,
+			@RequestParam(value = "name", required = false) String restName,
+			@RequestParam(value = "review", required = false) String restReview,
+			@RequestParam(value = "cuisine", required = false) Byte restCuisine,
+			@RequestParam(value = "interior", required = false) Byte restInterior,
+			@RequestParam(value = "service", required = false) Byte restService, Model model) {
 
 		model.addAttribute("restOne", admService.readRestaurantById(restId));
 
@@ -121,6 +137,7 @@ public class MainController {
 		//// model.addAttribute("aAa", bBb);
 
 		return "adm-rest-one";
+		
 	}
 
 	@RequestMapping(value = "/AdmRestAddEdit")

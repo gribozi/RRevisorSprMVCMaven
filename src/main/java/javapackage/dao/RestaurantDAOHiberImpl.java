@@ -13,7 +13,7 @@ import javapackage.domain.Restaurant;
 import javapackage.util.HibernateUtil;
 
 @Repository
-public class RestaurantDAOImpl implements RestaurantDAO {
+public class RestaurantDAOHiberImpl implements RestaurantDAO {
 
 	// Возвращает список всех ресторанов, выбранных из БД. Параметр метода задает способ сортировки результата.
 	@Override

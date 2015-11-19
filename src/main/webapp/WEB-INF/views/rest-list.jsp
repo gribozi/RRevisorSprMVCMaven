@@ -7,17 +7,17 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 
-<link href="css/style.css" rel="stylesheet" type="text/css" />
-<link href="js/fancybox/jquery.fancybox.css" rel="stylesheet" type="text/css" />
-<script src="js/jquery-1.11.3.min.js" type="text/javascript"></script>
-<script src="js/fancybox/jquery.fancybox.pack.js" type="text/javascript"></script>
-<script src="js/functions.js" type="text/javascript"></script>
+<link href="<c:url value="/resources/static/css/style.css" />" rel="stylesheet" type="text/css" />
+<link href="<c:url value="/resources/static/js/fancybox/jquery.fancybox.css" />" rel="stylesheet" type="text/css" />
+<script src="<c:url value="/resources/static/js/jquery-1.11.3.min.js" />" type="text/javascript"></script>
+<script src="<c:url value="/resources/static/js/fancybox/jquery.fancybox.pack.js" />" type="text/javascript"></script>
+<script src="<c:url value="/resources/static/js/functions.js" />" type="text/javascript"></script>
 <script src="http://maps.googleapis.com/maps/api/js?sensor=false" type="text/javascript"></script>
 
 <title>Рестораны</title>
 
-<!--[if IE]><link rel="shortcut icon" href="img/favicon.ico"><![endif]-->
-<link rel="icon" href="img/favicon.png">
+<!--[if IE]><link rel="shortcut icon" href="<c:url value="/resources/static/img/favicon.png" />"><![endif]-->
+<link rel="icon" href="<c:url value="/resources/static/img/favicon.png" />">
 
 <!--[if lt IE 9]>
 <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>

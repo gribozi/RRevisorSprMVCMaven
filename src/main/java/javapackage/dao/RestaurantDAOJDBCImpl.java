@@ -59,7 +59,7 @@ public class RestaurantDAOJDBCImpl implements RestaurantDAO  {
 		try {
 			Connection conn = JDBCUtil.getDBConnection();
 			
-			PreparedStatement stmt = conn.prepareStatement("SELECT id, name, cuisine_rating, interior_rating, service_rating FROM restaurants WHERE name LIKE ? OR review LIKE ?");
+			PreparedStatement stmt = conn.prepareStatement("SELECT id, name, review, cuisine_rating, interior_rating, service_rating FROM restaurants WHERE name LIKE ? OR review LIKE ?");
 			stmt.setString(1, "%" + searchQuery + "%");
 			stmt.setString(2, "%" + searchQuery + "%");
 			ResultSet rslt = stmt.executeQuery();

@@ -7,11 +7,11 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 
-<link href="css/style.css" rel="stylesheet" type="text/css" />
-<link href="js/fancybox/jquery.fancybox.css" rel="stylesheet" type="text/css" />
-<script src="js/jquery-1.11.3.min.js" type="text/javascript"></script>
-<script src="js/fancybox/jquery.fancybox.pack.js" type="text/javascript"></script>
-<script src="js/functions.js" type="text/javascript"></script>
+<link href="<c:url value="/resources/static/css/style.css" />" rel="stylesheet" type="text/css" />
+<link href="<c:url value="/resources/static/js/fancybox/jquery.fancybox.css" />" rel="stylesheet" type="text/css" />
+<script src="<c:url value="/resources/static/js/jquery-1.11.3.min.js" />" type="text/javascript"></script>
+<script src="<c:url value="/resources/static/js/fancybox/jquery.fancybox.pack.js" />" type="text/javascript"></script>
+<script src="<c:url value="/resources/static/js/functions.js" />" type="text/javascript"></script>
 
 <title>
 	<c:choose>
@@ -24,8 +24,8 @@
 	</c:choose>
 </title>
 
-<!--[if IE]><link rel="shortcut icon" href="img/favicon.ico"><![endif]-->
-<link rel="icon" href="img/favicon.png">
+<!--[if IE]><link rel="shortcut icon" href="<c:url value="/resources/static/img/favicon.png" />"><![endif]-->
+<link rel="icon" href="<c:url value="/resources/static/img/favicon.png" />">
 
 <!--[if lt IE 9]>
 <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
@@ -79,12 +79,12 @@
 			
 	    <c:if test="${not empty restOne.id}">
 		 	<div class="gallery">
-			 	<a class="fancy" rel="group" title="Это фото 1" href="img/gallery/${restOne.id}/010-b.jpg"><img src="img/gallery/${restOne.id}/010-s.jpg" /></a>
-			 	<a class="fancy" rel="group" title="Это фото 2" href="img/gallery/${restOne.id}/020-b.jpg"><img src="img/gallery/${restOne.id}/020-s.jpg" /></a>
-			 	<a class="fancy" rel="group" title="Это фото 3" href="img/gallery/${restOne.id}/030-b.jpg"><img src="img/gallery/${restOne.id}/030-s.jpg" /></a>
-			 	<a class="fancy" rel="group" title="Это фото 4" href="img/gallery/${restOne.id}/040-b.jpg"><img src="img/gallery/${restOne.id}/040-s.jpg" /></a>
-			 	<a class="fancy" rel="group" title="Это фото 5" href="img/gallery/${restOne.id}/050-b.jpg"><img src="img/gallery/${restOne.id}/050-s.jpg" /></a>
-			 	<a class="fancy" rel="group" title="Это фото 6" href="img/gallery/${restOne.id}/060-b.jpg"><img src="img/gallery/${restOne.id}/060-s.jpg" /></a>
+			 	<a class="fancy" rel="group" title="Это фото 1" href="<c:url value="/resources/static/img/gallery/${restOne.id}/010-b.jpg" />"><img src="<c:url value="/resources/static/img/gallery/${restOne.id}/010-s.jpg" />"></a>
+			 	<a class="fancy" rel="group" title="Это фото 2" href="<c:url value="/resources/static/img/gallery/${restOne.id}/020-b.jpg" />"><img src="<c:url value="/resources/static/img/gallery/${restOne.id}/020-s.jpg" />"></a>
+			 	<a class="fancy" rel="group" title="Это фото 3" href="<c:url value="/resources/static/img/gallery/${restOne.id}/030-b.jpg" />"><img src="<c:url value="/resources/static/img/gallery/${restOne.id}/030-s.jpg" />"></a>
+			 	<a class="fancy" rel="group" title="Это фото 4" href="<c:url value="/resources/static/img/gallery/${restOne.id}/040-b.jpg" />"><img src="<c:url value="/resources/static/img/gallery/${restOne.id}/040-s.jpg" />"></a>
+			 	<a class="fancy" rel="group" title="Это фото 5" href="<c:url value="/resources/static/img/gallery/${restOne.id}/050-b.jpg" />"><img src="<c:url value="/resources/static/img/gallery/${restOne.id}/050-s.jpg" />"></a>
+			 	<a class="fancy" rel="group" title="Это фото 6" href="<c:url value="/resources/static/img/gallery/${restOne.id}/060-b.jpg" />"><img src="<c:url value="/resources/static/img/gallery/${restOne.id}/060-s.jpg" />"></a>
 			</div>
 			<form action="AdmRestOne" enctype="multipart/form-data" method="post" class="form-files-admin">
 				<input type="file" name="photo" multiple accept="image/*,image/jpeg">

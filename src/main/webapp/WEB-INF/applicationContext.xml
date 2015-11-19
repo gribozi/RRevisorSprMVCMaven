@@ -10,18 +10,18 @@
 	<!-- Для иъекций путем сканирования и аннотаций
 	<context:annotation-config/>
 	<context:component-scan base-package="javapackage.services" />
-	 -->
-	
-	<bean id="rDAO" class="javapackage.dao.RestaurantDAOJDBCImpl" />
-	
+	-->
+
+	<bean id="rDAO" class="javapackage.dao.RestaurantDAOHiberImpl" />
+
 	<!--
-	<bean id="rDAO" class="javapackage.dao.RestaurantDAOImpl" />
-	 -->
+	<bean id="rDAO" class="javapackage.dao.RestaurantDAOJDBCImpl" />
+	-->
 
 	<bean class="javapackage.services.UserServiceImpl">
 		<property name="restDAO" ref="rDAO" />
 	</bean>
-	
+
 	<bean class="javapackage.services.AdminServiceImpl">
 		<property name="restDAO" ref="rDAO" />
 	</bean>
