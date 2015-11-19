@@ -79,9 +79,10 @@ public class RestaurantDAOHiberImpl implements RestaurantDAO {
 
 		try {
 			session = HibernateUtil.getSessionFactory().openSession();
-			// Разобраться, почему не работает через load (что-то не то возвращается, проблема при обращении к объекту из jsp-файла)
-			// rest = (Restaurant) session.load(Restaurant.class, id);
-			rest = (Restaurant) session.createSQLQuery("SELECT * FROM restaurants WHERE id = ?").addEntity(Restaurant.class).setInteger(0, id).uniqueResult();
+			// Не работает через load (что-то не то возвращается, проблема при обращении к объекту из jsp-файла). Зато работает через get.
+			rest = (Restaurant) session.get(Restaurant.class, id);
+			// Альтернатива через createSQLQuery
+			// rest = (Restaurant) session.createSQLQuery("SELECT * FROM restaurants WHERE id = ?").addEntity(Restaurant.class).setInteger(0, id).uniqueResult();
 
 		} catch (Exception e) {
 			System.err.println(e.getClass().getName() + ": " + e.getMessage());
