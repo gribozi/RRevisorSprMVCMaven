@@ -1,6 +1,7 @@
 package javapackage.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -24,7 +25,9 @@ public class MainController {
 	@RequestMapping(value = {"/", "/RestList"})
 	public String displayRestList(
 			@RequestParam(value = "queary", required = false) String queary,
-			@RequestParam(value = "sort", required = false) String sort, Model model) {
+			@RequestParam(value = "sort", required = false) String sort, Authentication authentication, Model model) {
+		
+		model.addAttribute("userName", "Вы: " + (authentication == null ? "null" : authentication.getName() ) );
 
 		// Если обрабатываем POST-запрос поиска
 		if (queary != null) {
@@ -44,8 +47,10 @@ public class MainController {
 	}
 
 	@RequestMapping(value = "/RestOne")
-	public String displayRestOne(@RequestParam("rest") int restId, Model model) {
+	public String displayRestOne(@RequestParam("rest") int restId, Authentication authentication, Model model) {
 		model.addAttribute("restOne", usrService.readRestaurantById(restId));
+		
+		model.addAttribute("userName", "Вы: " + (authentication == null ? "null" : authentication.getName() ) );
 
 		//// Читаем или считаем фотки из папки ресторана
 		//// filesWork.readPhoto(restId);
@@ -54,11 +59,13 @@ public class MainController {
 		return "rest-one";
 	}
 
-	@RequestMapping(value = "/AdmRestList")
+	@RequestMapping(value = {"/admin", "/admin/AdmRestList"})
 	public String displayAdmRestList(
 			@RequestParam(value = "id", required = false, defaultValue = "0") int id,
-			@RequestParam(value = "checked", required = false) int[] checked, Model model) {
+			@RequestParam(value = "checked", required = false) int[] checked, Authentication authentication, Model model) {
 
+		model.addAttribute("userName", "Вы: " + (authentication == null ? "null" : authentication.getName() ) );
+		
 		// Обработка POST-запроса
 
 		// Если удаляется один ресторан (со страницы adm-rest-one.jsp)
@@ -81,14 +88,16 @@ public class MainController {
 		return "adm-rest-list";
 	}
 
-	@RequestMapping(value = "/AdmRestOne", method = RequestMethod.POST)
+	@RequestMapping(value = "/admin/AdmRestOne", method = RequestMethod.POST)
 	public String displayAdmRestOnePOST(
 			@RequestParam(value = "id", required = false, defaultValue = "0") int restId,
 			@RequestParam(value = "name", required = false) String restName,
 			@RequestParam(value = "review", required = false) String restReview,
 			@RequestParam(value = "cuisine", required = false) Byte restCuisine,
 			@RequestParam(value = "interior", required = false) Byte restInterior,
-			@RequestParam(value = "service", required = false) Byte restService, Model model) {
+			@RequestParam(value = "service", required = false) Byte restService, Authentication authentication, Model model) {
+		
+		model.addAttribute("userName", "Вы: " + (authentication == null ? "null" : authentication.getName() ) );
 		
 		boolean savedOK;
 
@@ -121,14 +130,16 @@ public class MainController {
 		return "adm-rest-one";
 	}
 
-	@RequestMapping(value = "/AdmRestOne", method = RequestMethod.GET)
+	@RequestMapping(value = "/admin/AdmRestOne", method = RequestMethod.GET)
 	public String displayAdmRestOneGET(
 			@RequestParam(value = "id", required = false, defaultValue = "0") int restId,
 			@RequestParam(value = "name", required = false) String restName,
 			@RequestParam(value = "review", required = false) String restReview,
 			@RequestParam(value = "cuisine", required = false) Byte restCuisine,
 			@RequestParam(value = "interior", required = false) Byte restInterior,
-			@RequestParam(value = "service", required = false) Byte restService, Model model) {
+			@RequestParam(value = "service", required = false) Byte restService, Authentication authentication, Model model) {
+		
+		model.addAttribute("userName", "Вы: " + (authentication == null ? "null" : authentication.getName() ) );
 
 		model.addAttribute("restOne", admService.readRestaurantById(restId));
 
@@ -140,8 +151,10 @@ public class MainController {
 		
 	}
 
-	@RequestMapping(value = "/AdmRestAddEdit")
-	public String displayAdmRestAddEdit(@RequestParam(value = "id", required = false, defaultValue = "0") int restId, Model model) {
+	@RequestMapping(value = "/admin/AdmRestAddEdit")
+	public String displayAdmRestAddEdit(@RequestParam(value = "id", required = false, defaultValue = "0") int restId, Authentication authentication, Model model) {
+		
+		model.addAttribute("userName", "Вы: " + (authentication == null ? "null" : authentication.getName() ) );
 
 		// Если GET-запрос на редактирование
 		if (restId != 0) {

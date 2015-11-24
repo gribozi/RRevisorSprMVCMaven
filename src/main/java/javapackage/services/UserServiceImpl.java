@@ -2,13 +2,12 @@ package javapackage.services;
 
 import java.util.List;
 
-import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import javapackage.dao.RestaurantDAO;
+import javapackage.dao.restaurant.RestaurantDAO;
 import javapackage.domain.Restaurant;
 
-@Service
+//@Service не нужно, так как этот бин "поднимаем" не автосканом, а в файле applicationContext.xml
 public class UserServiceImpl implements UserService {
 
 	// Здесь производится инъекция через XML-файл aplicationContext.xml

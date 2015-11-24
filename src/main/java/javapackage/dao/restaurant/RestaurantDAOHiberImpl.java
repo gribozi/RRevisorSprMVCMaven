@@ -1,4 +1,4 @@
-package javapackage.dao;
+package javapackage.dao.restaurant;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -7,12 +7,12 @@ import org.hibernate.Session;
 import org.hibernate.criterion.MatchMode;
 import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
-import org.springframework.stereotype.Repository;
 
 import javapackage.domain.Restaurant;
 import javapackage.util.HibernateUtil;
 
-@Repository
+// @Repository не нужно, так как этот бин "поднимаем" не автосканом, а в файле applicationContext.xml
+@SuppressWarnings("unchecked")
 public class RestaurantDAOHiberImpl implements RestaurantDAO {
 
 	// Возвращает список всех ресторанов, выбранных из БД. Параметр метода задает способ сортировки результата.
@@ -23,9 +23,7 @@ public class RestaurantDAOHiberImpl implements RestaurantDAO {
 		List<Restaurant> rests = new ArrayList<Restaurant>();
 
 		try {
-
 			session = HibernateUtil.getSessionFactory().openSession();
-
 			if (sort.equals("rateTotal")) {
 				rests = session.createSQLQuery("SELECT * FROM restaurants ORDER BY (cuisine_rating * 0.4 + interior_rating * 0.3 + service_rating * 0.3) DESC")
 						.addEntity(Restaurant.class)

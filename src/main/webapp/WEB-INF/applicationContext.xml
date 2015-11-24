@@ -12,10 +12,10 @@
 	<context:component-scan base-package="javapackage.services" />
 	-->
 
-	<bean id="rDAO" class="javapackage.dao.RestaurantDAOHiberImpl" />
+	<bean id="rDAO" class="javapackage.dao.restaurant.RestaurantDAOHiberImpl" />
 
 	<!--
-	<bean id="rDAO" class="javapackage.dao.RestaurantDAOJDBCImpl" />
+	<bean id="rDAO" class="javapackage.dao.restaurant.RestaurantDAOJDBCImpl" />
 	-->
 
 	<bean class="javapackage.services.UserServiceImpl">
@@ -24,6 +24,13 @@
 
 	<bean class="javapackage.services.AdminServiceImpl">
 		<property name="restDAO" ref="rDAO" />
+	</bean>
+	
+	
+	<bean id="uDAO" class="javapackage.dao.user.UserDAOImpl" />
+	
+	<bean id="myUserDetailsService" class="javapackage.services.MyUserDetailsService">
+		<property name="userDAO" ref="uDAO" />
 	</bean>
 
 </beans>

@@ -32,6 +32,6 @@ function initializeMap() {
     position: new google.maps.LatLng(46.504387, 30.619852),
     map: map,
     title: 'Компот',
-    icon: 'img/map-pin.png'
+    icon: 'resources/static/img/map-pin.png'
   });
 }

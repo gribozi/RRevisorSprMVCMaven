@@ -1,14 +1,12 @@
-package javapackage.dao;
+package javapackage.dao.restaurant;
 
 import java.sql.*;
 import java.util.ArrayList;
 
-import org.springframework.stereotype.Repository;
-
 import javapackage.domain.Restaurant;
 import javapackage.util.JDBCUtil;
 
-@Repository
+//@Repository не нужно, так как этот бин "поднимаем" не автосканом, а в файле applicationContext.xml
 public class RestaurantDAOJDBCImpl implements RestaurantDAO  {
 	
 	// Возвращает список всех ресторанов, выбранных из БД. Параметр метода задает способ сортировки результата.

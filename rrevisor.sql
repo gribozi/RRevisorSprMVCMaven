@@ -67,6 +67,46 @@ INSERT INTO `restaurants` (`id`, `name`, `review`, `cuisine_rating`, `interior_r
 	(15, 'Катран', 'Ресторан Катран предлагает большой выбор всевозможных морепродуктов, морских и океанических деликатесов. Широкий выбор блюд приготовляемых на открытом огне. Кухня представленная в ресторане настолько разнообразна, что зачастую можно не сразу определиться в выборе блюд, которые хотелось бы попробовать. \r\n\r\nПоэтому клиенты, которые единожды посетили ресторан Катран возвращаются вновь и вновь чтобы отведать что-нибудь новенькое и необычное. \r\n\r\nЛетом ресторан располагает открытой палубой на борту фрегата Катран и еще двумя открытыми площадками, где не только можно любоваться морским прибоем, но и вдыхать незабываемый аромат моря.', 3, 4, 4, NULL),
 	(16, 'Марафеть', 'Кафе-ресторан МАРАФЕТЪ располагается недалеко от Соборной площади, в самом центре Одессы. В меню представлены блюда традиционной одесской кухни. Каждый посетитель сможет угоститься домашней выпечкой, разнообразными супами, пельменями, варениками и многим другим.', 3, 2, 1, NULL);
 /*!40000 ALTER TABLE `restaurants` ENABLE KEYS */;
+
+
+-- Дамп структуры для таблица revisor.users
+DROP TABLE IF EXISTS `users`;
+CREATE TABLE IF NOT EXISTS `users` (
+  `username` varchar(45) collate utf8_unicode_ci NOT NULL,
+  `password` varchar(60) collate utf8_unicode_ci NOT NULL,
+  `enabled` tinyint(4) NOT NULL default '1',
+  PRIMARY KEY  (`username`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+-- Дамп данных таблицы revisor.users: ~2 rows (приблизительно)
+DELETE FROM `users`;
+/*!40000 ALTER TABLE `users` DISABLE KEYS */;
+INSERT INTO `users` (`username`, `password`, `enabled`) VALUES
+	('admin', 'admin', 1),
+	('user', 'user', 1);
+/*!40000 ALTER TABLE `users` ENABLE KEYS */;
+
+
+-- Дамп структуры для таблица revisor.user_roles
+DROP TABLE IF EXISTS `user_roles`;
+CREATE TABLE IF NOT EXISTS `user_roles` (
+  `user_role_id` int(11) NOT NULL auto_increment,
+  `username` varchar(45) collate utf8_unicode_ci NOT NULL,
+  `role` varchar(45) collate utf8_unicode_ci NOT NULL,
+  PRIMARY KEY  (`user_role_id`),
+  UNIQUE KEY `uni_username_role` (`role`,`username`),
+  KEY `fk_username` (`username`),
+  CONSTRAINT `fk_username` FOREIGN KEY (`username`) REFERENCES `users` (`username`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+-- Дамп данных таблицы revisor.user_roles: ~3 rows (приблизительно)
+DELETE FROM `user_roles`;
+/*!40000 ALTER TABLE `user_roles` DISABLE KEYS */;
+INSERT INTO `user_roles` (`user_role_id`, `username`, `role`) VALUES
+	(2, 'admin', 'ROLE_ADMIN'),
+	(1, 'admin', 'ROLE_USER'),
+	(3, 'user', 'ROLE_USER');
+/*!40000 ALTER TABLE `user_roles` ENABLE KEYS */;
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
 /*!40014 SET FOREIGN_KEY_CHECKS=IF(@OLD_FOREIGN_KEY_CHECKS IS NULL, 1, @OLD_FOREIGN_KEY_CHECKS) */;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

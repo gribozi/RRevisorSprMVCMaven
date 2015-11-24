@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
     pageEncoding="utf-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -26,6 +27,13 @@
 <body class="adm">
 	<div class="container">
 
+		<sec:authorize access="isAuthenticated()">
+			<p>${userName} (<a href="<c:url value="/logout"/>" class="link">выйти</a>)</p>
+		</sec:authorize>
+		<sec:authorize access="isAnonymous()">
+			<p><a href="<c:url value="/login"/>" class="link">Войти</a></p>
+		</sec:authorize>
+		
 		<c:choose>
 		    <c:when test="${savedOK}">
 		       <p style="color: green" class="message-adm">Всё успешно соранено.</p>
@@ -66,12 +74,12 @@
 	 	<c:choose>
 	 		<c:when test="${(operationType == 'edit') || (operationType == null)}">
 			 	<div class="gallery">
-				 	<a class="fancy" rel="group" title="Это фото 1" href="img/gallery/${restOne.id}/010-b.jpg"><img src="img/gallery/${restOne.id}/010-s.jpg" /></a>
-				 	<a class="fancy" rel="group" title="Это фото 2" href="img/gallery/${restOne.id}/020-b.jpg"><img src="img/gallery/${restOne.id}/020-s.jpg" /></a>
-				 	<a class="fancy" rel="group" title="Это фото 3" href="img/gallery/${restOne.id}/030-b.jpg"><img src="img/gallery/${restOne.id}/030-s.jpg" /></a>
-				 	<a class="fancy" rel="group" title="Это фото 4" href="img/gallery/${restOne.id}/040-b.jpg"><img src="img/gallery/${restOne.id}/040-s.jpg" /></a>
-				 	<a class="fancy" rel="group" title="Это фото 5" href="img/gallery/${restOne.id}/050-b.jpg"><img src="img/gallery/${restOne.id}/050-s.jpg" /></a>
-				 	<a class="fancy" rel="group" title="Это фото 6" href="img/gallery/${restOne.id}/060-b.jpg"><img src="img/gallery/${restOne.id}/060-s.jpg" /></a>
+				 	<a class="fancy" rel="group" title="Это фото 1" href="<c:url value="/resources/static/img/gallery/${restOne.id}/010-b.jpg" />"><img src="<c:url value="/resources/static/img/gallery/${restOne.id}/010-s.jpg" />"></a>
+				 	<a class="fancy" rel="group" title="Это фото 2" href="<c:url value="/resources/static/img/gallery/${restOne.id}/020-b.jpg" />"><img src="<c:url value="/resources/static/img/gallery/${restOne.id}/020-s.jpg" />"></a>
+				 	<a class="fancy" rel="group" title="Это фото 3" href="<c:url value="/resources/static/img/gallery/${restOne.id}/030-b.jpg" />"><img src="<c:url value="/resources/static/img/gallery/${restOne.id}/030-s.jpg" />"></a>
+				 	<a class="fancy" rel="group" title="Это фото 4" href="<c:url value="/resources/static/img/gallery/${restOne.id}/040-b.jpg" />"><img src="<c:url value="/resources/static/img/gallery/${restOne.id}/040-s.jpg" />"></a>
+				 	<a class="fancy" rel="group" title="Это фото 5" href="<c:url value="/resources/static/img/gallery/${restOne.id}/050-b.jpg" />"><img src="<c:url value="/resources/static/img/gallery/${restOne.id}/050-s.jpg" />"></a>
+				 	<a class="fancy" rel="group" title="Это фото 6" href="<c:url value="/resources/static/img/gallery/${restOne.id}/060-b.jpg" />"><img src="<c:url value="/resources/static/img/gallery/${restOne.id}/060-s.jpg" />"></a>
 				</div>
 			</c:when>
 			<c:otherwise>
@@ -80,7 +88,7 @@
 		</c:choose>
 	 	<a class="link" href="AdmRestList">Список ресторанов</a>
 		<br><br>
-	 	<a class="mode" href="RestList">Сайт</a>
+	 	<a class="mode" href="../">Сайт</a>
 	</div>
 </body>
 </html>

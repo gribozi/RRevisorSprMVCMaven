@@ -12,9 +12,9 @@ import org.hibernate.annotations.GenericGenerator;
 @Table(name="restaurants")
 public class Restaurant {
 	
-    @Id
-    @GeneratedValue(generator="increment")
-    @GenericGenerator(name="increment", strategy = "increment")
+	@Id
+	@GeneratedValue(generator="increment")
+	@GenericGenerator(name="increment", strategy = "increment")
 	private int id;
 
 	private String name;

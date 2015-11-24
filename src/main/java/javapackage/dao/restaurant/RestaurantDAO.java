@@ -1,4 +1,4 @@
-package javapackage.dao;
+package javapackage.dao.restaurant;
 
 import java.util.List;
 

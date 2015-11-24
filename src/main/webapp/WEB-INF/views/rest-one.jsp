@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
     pageEncoding="utf-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -25,6 +26,14 @@
 </head>
 <body>
 	<div class="container">
+	
+		<sec:authorize access="isAuthenticated()">
+			<p>${userName} (<a href="<c:url value="/logout"/>" class="link">выйти</a>)</p>
+		</sec:authorize>
+		<sec:authorize access="isAnonymous()">
+			<p><a href="<c:url value="/login"/>" class="link">Войти</a></p>
+		</sec:authorize>
+		
 		<h1>${restOne.name}</h1>
 		<div class="allrates">
 			<table class="rates-tabl">
@@ -59,7 +68,7 @@
 		
 	 	<a class="link" href="RestList">Список ресторанов</a>
 	 	<br><br>
-	 	<a class="mode" href="AdmRestList">Админка</a>
+	 	<a class="mode" href="admin/">Админка</a>
 	</div>
 	
 	

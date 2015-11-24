@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
     pageEncoding="utf-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -34,6 +35,13 @@
 </head>
 <body class="adm">
 	<div class="container">
+	
+		<sec:authorize access="isAuthenticated()">
+			<p>${userName} (<a href="<c:url value="/logout"/>" class="link">выйти</a>)</p>
+		</sec:authorize>
+		<sec:authorize access="isAnonymous()">
+			<p><a href="<c:url value="/login"/>" class="link">Войти</a></p>
+		</sec:authorize>
 		
 		<form action="AdmRestOne" method="post" class="form-admin">
 			<input type="text" name="name" class="name-adm" size="20" required value="${restOne.name}" placeholder="Название ресторана">
@@ -94,7 +102,7 @@
 	    			
 	 	<a class="link" href="AdmRestList">Список ресторанов</a>
 		<br><br>
-	 	<a class="mode" href="RestList">Сайт</a>
+	 	<a class="mode" href="../">Сайт</a>
 	</div>	 	
 </body>
 </html>
