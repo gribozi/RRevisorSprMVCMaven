@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=utf-8"
-    pageEncoding="utf-8"%>
+<%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 
@@ -74,12 +73,12 @@
 	
 	<script type="text/javascript">(function(w,doc) {
 	if (!w.__utlWdgt ) {
-	    w.__utlWdgt = true;
-	    var d = doc, s = d.createElement('script'), g = 'getElementsByTagName';
-	    s.type = 'text/javascript'; s.charset='UTF-8'; s.async = true;
-	    s.src = ('https:' == w.location.protocol ? 'https' : 'http')  + '://w.uptolike.com/widgets/v1/uptolike.js';
-	    var h=d[g]('body')[0];
-	    h.appendChild(s);
+		w.__utlWdgt = true;
+		var d = doc, s = d.createElement('script'), g = 'getElementsByTagName';
+		s.type = 'text/javascript'; s.charset='UTF-8'; s.async = true;
+		s.src = ('https:' == w.location.protocol ? 'https' : 'http')  + '://w.uptolike.com/widgets/v1/uptolike.js';
+		var h=d[g]('body')[0];
+		h.appendChild(s);
 	}})(window,document);
 	</script>
 	

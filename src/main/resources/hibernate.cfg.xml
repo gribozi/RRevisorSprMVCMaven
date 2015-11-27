@@ -17,3 +17,12 @@
 		<mapping class="javapackage.domain.UserRole" />
 	</session-factory>
 </hibernate-configuration>
+
+<!--
+	Вместо данного олд-скульного подключения Гибернейта теперь он
+	подключается в стиле Спринга, т. е. "поднимается" как bean
+	(смотри applicationContext.xml -> Beans for Hibernate)
+	http://docs.spring.io/spring/docs/current/spring-framework-reference/html/orm.html#orm-session-factory-setup
+	
+	Данный конфиг и класс HibernateUtil больше не используются.
+-->

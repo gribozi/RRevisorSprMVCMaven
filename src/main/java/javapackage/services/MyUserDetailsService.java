@@ -65,5 +65,4 @@ public class MyUserDetailsService implements UserDetailsService {
 		this.userDAO = userDAO;
 	}
 
-
 }

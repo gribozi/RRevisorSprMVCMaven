@@ -1,8 +1,10 @@
 /*
- * Было бы правильно вместо этого статитческого класса реализовать 
- * конфигурацию по-спринговому (через бины). Но это не получилось.
- * Как это сделать рассказывается здесь:
+ * Вместо данного олд-скульного подключения Гибернейта теперь он
+ * подключается в стиле Спринга, т. е. "поднимается" как bean
+ * (смотри applicationContext.xml -> Beans for Hibernate)
  * http://docs.spring.io/spring/docs/current/spring-framework-reference/html/orm.html#orm-session-factory-setup
+ * 
+ * Данный класс и конфиг hibernate.cfg.xml больше не используются.
  */
 
 package javapackage.util;

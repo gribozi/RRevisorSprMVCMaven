@@ -4,16 +4,28 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.hibernate.Session;
+import org.hibernate.SessionFactory;
 import org.hibernate.criterion.MatchMode;
 import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 
 import javapackage.domain.Restaurant;
-import javapackage.util.HibernateUtil;
+//import javapackage.util.HibernateUtil;
 
 // @Repository не нужно, так как этот бин "поднимаем" не автосканом, а в файле applicationContext.xml
 @SuppressWarnings("unchecked")
 public class RestaurantDAOHiberImpl implements RestaurantDAO {
+	
+	// Здесь производится инъекция через XML-файл aplicationContext.xml
+	private SessionFactory sessionFactory;
+
+	public SessionFactory getSessionFactory() {
+		return sessionFactory;
+	}
+
+	public void setSessionFactory(SessionFactory sessionFactory) {
+		this.sessionFactory = sessionFactory;
+	}
 
 	// Возвращает список всех ресторанов, выбранных из БД. Параметр метода задает способ сортировки результата.
 	@Override
@@ -23,7 +35,9 @@ public class RestaurantDAOHiberImpl implements RestaurantDAO {
 		List<Restaurant> rests = new ArrayList<Restaurant>();
 
 		try {
-			session = HibernateUtil.getSessionFactory().openSession();
+			// session = HibernateUtil.getSessionFactory().openSession();
+			session = sessionFactory.openSession();
+			
 			if (sort.equals("rateTotal")) {
 				rests = session.createSQLQuery("SELECT * FROM restaurants ORDER BY (cuisine_rating * 0.4 + interior_rating * 0.3 + service_rating * 0.3) DESC")
 						.addEntity(Restaurant.class)
@@ -50,7 +64,9 @@ public class RestaurantDAOHiberImpl implements RestaurantDAO {
 		List<Restaurant> rests = new ArrayList<Restaurant>();
 
 		try {
-			session = HibernateUtil.getSessionFactory().openSession();
+			// session = HibernateUtil.getSessionFactory().openSession();
+			session = sessionFactory.openSession();
+			
 			rests = session.createCriteria(Restaurant.class)
 					.add(Restrictions.or(
 							Restrictions.like("name", searchQuery, MatchMode.ANYWHERE),
@@ -76,7 +92,9 @@ public class RestaurantDAOHiberImpl implements RestaurantDAO {
 		Restaurant rest = null;
 
 		try {
-			session = HibernateUtil.getSessionFactory().openSession();
+			// session = HibernateUtil.getSessionFactory().openSession();
+			session = sessionFactory.openSession();
+			
 			// Не работает через load (что-то не то возвращается, проблема при обращении к объекту из jsp-файла). Зато работает через get.
 			rest = (Restaurant) session.get(Restaurant.class, id);
 			// Альтернатива через createSQLQuery
@@ -100,7 +118,9 @@ public class RestaurantDAOHiberImpl implements RestaurantDAO {
 		Session session = null;
 
 		try {
-			session = HibernateUtil.getSessionFactory().openSession();
+			// session = HibernateUtil.getSessionFactory().openSession();
+			session = sessionFactory.openSession();
+			
 			session.beginTransaction();
 			session.update(restaurant);
 			session.getTransaction().commit();
@@ -125,7 +145,9 @@ public class RestaurantDAOHiberImpl implements RestaurantDAO {
 		Session session = null;
 
 		try {
-			session = HibernateUtil.getSessionFactory().openSession();
+			// session = HibernateUtil.getSessionFactory().openSession();
+			session = sessionFactory.openSession();
+			
 			session.beginTransaction();
 			for (int rest : selected_rests) {
 				Restaurant restaurant = (Restaurant) session.load(Restaurant.class, rest);
@@ -151,7 +173,9 @@ public class RestaurantDAOHiberImpl implements RestaurantDAO {
 		Session session = null;
 
 		try {
-			session = HibernateUtil.getSessionFactory().openSession();
+			// session = HibernateUtil.getSessionFactory().openSession();
+			session = sessionFactory.openSession();
+			
 			session.beginTransaction();
 			session.save(restaurant);
 			session.getTransaction().commit();
