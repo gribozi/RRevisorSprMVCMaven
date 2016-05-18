@@ -11,6 +11,9 @@ import javapackage.domain.User;
 
 //@Repository не нужно, так как этот бин "поднимаем" не автосканом, а в файле applicationContext.xml
 public class UserDAOImpl implements UserDAO {
+
+	// Здесь производится инъекция через XML-файл aplicationContext.xml
+	private SessionFactory sessionFactory;
 	
 	public SessionFactory getSessionFactory() {
 		return sessionFactory;
@@ -19,10 +22,8 @@ public class UserDAOImpl implements UserDAO {
 	public void setSessionFactory(SessionFactory sessionFactory) {
 		this.sessionFactory = sessionFactory;
 	}
-
-	// Здесь производится инъекция через XML-файл aplicationContext.xml
-	private SessionFactory sessionFactory;
-
+	
+	@Override
 	@SuppressWarnings("unchecked")
 	public User readUserByName(String username) {
 
